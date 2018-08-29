@@ -1,4 +1,4 @@
-package com.example.danazone04.admin.main;
+package com.example.danazone04.admin.main.login.admin;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,27 +8,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.danazone04.admin.BaseAdapter;
 import com.example.danazone04.admin.R;
+import com.example.danazone04.admin.bean.Admin;
 import com.example.danazone04.admin.bean.Users;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainAdapter extends BaseAdapter implements Filterable {
+public class ViewAdminAdapter extends BaseAdapter implements Filterable {
 
     public interface OnUserClickListener {
-        void onClickItem(Users position);
+        void onClickItem(Admin position);
     }
-    private List<Users> mList;
+    private List<Admin> mList;
     private OnUserClickListener mListener;
-    private List<Users> mFilterList;
+    private List<Admin> mFilterList;
     private Filter mFilter;
 
-    public MainAdapter(@NonNull Context context, List<Users> list, OnUserClickListener listener) {
+    public ViewAdminAdapter(@NonNull Context context, List<Admin> list, OnUserClickListener listener) {
         super(context);
         mList = list;
         mFilterList = list;
@@ -38,7 +40,7 @@ public class MainAdapter extends BaseAdapter implements Filterable {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_holder_users, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_holder_admin, parent, false);
         return new ViewHolderItem(view);
     }
 
@@ -50,10 +52,9 @@ public class MainAdapter extends BaseAdapter implements Filterable {
      */
     private void onBindViewHolderItem(ViewHolderItem holder, final int position) {
       //  Users mRun = mList.get(position);
-        holder.mTvName.setText(mFilterList.get(position).getUsername());
+        holder.mTvName.setText(mFilterList.get(position).getName());
         holder.mTvPhone.setText(mFilterList.get(position).getPhone());
-        holder.mTvBike.setText(mFilterList.get(position).getBike());
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+        holder.mImgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.onClickItem(mFilterList.get(position));
@@ -85,15 +86,15 @@ public class MainAdapter extends BaseAdapter implements Filterable {
     private class ViewHolderItem extends RecyclerView.ViewHolder {
         private TextView mTvName;
         private TextView mTvPhone;
-        private TextView mTvBike;
-        private LinearLayout mView;
+        private ImageView mImgDelete;
+
 
         public ViewHolderItem(View view) {
             super(view);
             mTvName = (TextView) view.findViewById(R.id.mTvName);
             mTvPhone = (TextView) view.findViewById(R.id.mTvPhone);
-            mTvBike = (TextView) view.findViewById(R.id.mTvBike);
-            mView = (LinearLayout) view.findViewById(R.id.mView);
+            mImgDelete = (ImageView) view.findViewById(R.id.mImgDelete);
+
         }
     }
 
@@ -107,11 +108,9 @@ public class MainAdapter extends BaseAdapter implements Filterable {
             if (charString.isEmpty()) {
                 mFilterList = mList;
             } else {
-                ArrayList<Users> filteredList = new ArrayList<>();
-                for (Users data : mFilterList) {
-                    if ( data.getPhone().toLowerCase().contains(charString)
-                            || data.getUsername().toLowerCase().contains(charString)
-                            || data.getBike().toLowerCase().contains(charString)) {
+                ArrayList<Admin> filteredList = new ArrayList<>();
+                for (Admin data : mFilterList) {
+                    if ( data.getPhone().toLowerCase().contains(charString) || data.getName().toLowerCase().contains(charString)) {
                         filteredList.add(data);
                     }
                 }
@@ -124,7 +123,7 @@ public class MainAdapter extends BaseAdapter implements Filterable {
 
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            mFilterList = (ArrayList<Users>) filterResults.values;
+            mFilterList = (ArrayList<Admin>) filterResults.values;
             notifyDataSetChanged();
         }
     }

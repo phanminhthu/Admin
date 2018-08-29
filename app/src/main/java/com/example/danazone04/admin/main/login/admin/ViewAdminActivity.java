@@ -1,14 +1,11 @@
-package com.example.danazone04.admin;
+package com.example.danazone04.admin.main.login.admin;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -16,18 +13,18 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.danazone04.admin.BaseActivity;
+import com.example.danazone04.admin.MainActivity;
+import com.example.danazone04.admin.R;
+import com.example.danazone04.admin.RecyclerViewUtils;
+import com.example.danazone04.admin.bean.Admin;
 import com.example.danazone04.admin.bean.Users;
 import com.example.danazone04.admin.common.Common;
-import com.example.danazone04.admin.common.ILoadMore;
 import com.example.danazone04.admin.common.MySingleton;
-import com.example.danazone04.admin.dialog.StartDialog;
 import com.example.danazone04.admin.main.MainAdapter;
 import com.example.danazone04.admin.main.info.ViewInfoUserActivity_;
-import com.example.danazone04.admin.main.login.admin.ViewAdminActivity_;
 
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,30 +38,20 @@ import java.util.Map;
 import dmax.dialog.SpotsDialog;
 
 @SuppressLint("Registered")
-@EActivity(R.layout.activity_main)
-public class MainActivity extends BaseActivity {
+@EActivity(R.layout.activity_view_admin)
+public class ViewAdminActivity extends BaseActivity {
     @ViewById
     RecyclerView mRecycleView;
     @ViewById
     EditText mEdtSearch;
-    @ViewById
-    ImageView mImgAdd;
-    @ViewById
-    ImageView mImgRemove;
 
-    private MainAdapter mAdapter;
-    private List<Users> mUsers;
+    private ViewAdminAdapter mAdapter;
+    private List<Admin> mUsers;
     private AlertDialog alertDialog;
-    @Extra
-    String mCode;
 
     @Override
     protected void afterView() {
-        if (SessionManager.getInstance().getKeySaveId().equals("admin") && mCode.equals("admin")) {
-            mImgAdd.setVisibility(View.VISIBLE);
-            mImgRemove.setVisibility(View.VISIBLE);
-        }
-        alertDialog = new SpotsDialog(MainActivity.this);
+        alertDialog = new SpotsDialog(this);
         setUpAdapter();
         loadData();
         //Search editText
@@ -75,10 +62,37 @@ public class MainActivity extends BaseActivity {
         RecyclerViewUtils.Create().setUpVertical(this, mRecycleView);
         mUsers = new ArrayList<>();
 
-        mAdapter = new MainAdapter(MainActivity.this, mUsers, new MainAdapter.OnUserClickListener() {
+        mAdapter = new ViewAdminAdapter(ViewAdminActivity.this, mUsers, new ViewAdminAdapter.OnUserClickListener() {
             @Override
-            public void onClickItem(Users position) {
-                ViewInfoUserActivity_.intent(MainActivity.this).mUsers(position).start();
+            public void onClickItem(final Admin position) {
+                alertDialog.show();
+                StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                        Common.URL_DELETE_ADMIN, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (response.contains("thanhcong")) {
+                            alertDialog.dismiss();
+                            mUsers.remove(position);
+                            mAdapter.notifyDataSetChanged();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        alertDialog.dismiss();
+                        showAlertDialog("loi");
+                    }
+                })
+                {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> parms = new HashMap<>();
+                        parms.put("code", position.getCode());
+                        return parms;
+                    }
+                };
+                MySingleton.getInstance(ViewAdminActivity.this).addToRequestQueue(stringRequest);
             }
         });
         mRecycleView.setAdapter(mAdapter);
@@ -87,30 +101,22 @@ public class MainActivity extends BaseActivity {
     private void loadData() {
         alertDialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                Common.URL_VIEW_USERS, new Response.Listener<String>() {
+                Common.URL_VIEW_ADMIN, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 alertDialog.dismiss();
                 try {
                     JSONArray jsonarray = new JSONArray(response);
                     for (int i = 0; i < jsonarray.length(); i++) {
-                        Users users = new Users();
+                        Admin users = new Admin();
                         JSONObject jsonobject = jsonarray.getJSONObject(i);
                         String name = jsonobject.getString("username");
                         String phone = jsonobject.getString("phone");
-                        String avatar = jsonobject.getString("avatar");
-                        String email = jsonobject.getString("email");
-                        String birthday = jsonobject.getString("birthday");
-                        String sex = jsonobject.getString("sex");
-                        String bike = jsonobject.getString("bike");
+                        String code = jsonobject.getString("code");
                         String iduser = jsonobject.getString("iduser");
 
-                        users.setAvatar(avatar);
-                        users.setBike(bike);
-                        users.setBirthday(birthday);
-                        users.setSex(sex);
-                        users.setUsername(name);
-                        users.setEmail(email);
+                        users.setName(name);
+                        users.setCode(code);
                         users.setPhone(phone);
                         users.setId(Integer.valueOf(iduser));
                         mUsers.add(users);
@@ -120,7 +126,7 @@ public class MainActivity extends BaseActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                mAdapter.notifyDataSetChanged();
+              //  mAdapter.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -128,14 +134,7 @@ public class MainActivity extends BaseActivity {
                 alertDialog.dismiss();
                 showAlertDialog("loi");
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parms = new HashMap<>();
-                parms.put("key", "10");
-                return parms;
-            }
-        };
+        });
         MySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
@@ -157,19 +156,5 @@ public class MainActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
             }
         });
-    }
-
-    @Click({R.id.mImgAdd, R.id.mImgRemove})
-    void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.mImgAdd:
-                new StartDialog(this).show();
-                break;
-
-            case R.id.mImgRemove:
-                ViewAdminActivity_.intent(this).start();
-                break;
-        }
-
     }
 }
