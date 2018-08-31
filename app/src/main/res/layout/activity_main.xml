@@ -30,6 +30,7 @@
                 android:gravity="center_vertical"
                 android:hint="Tìm kiếm"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="#dddddd" />
         </RelativeLayout>

@@ -19,6 +19,7 @@
             android:layout_marginRight="@dimen/_15sdp"
             android:background="@drawable/bg_shadow"
             android:maxLines="1"
+            android:singleLine="true"
             android:textColor="@color/black" />
         <TextView
             android:layout_gravity="center"

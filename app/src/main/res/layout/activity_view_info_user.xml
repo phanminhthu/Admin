@@ -97,7 +97,6 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="aaa"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_11sdp" />
                     </RelativeLayout>
@@ -120,7 +119,6 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="aaa"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_11sdp" />
                     </RelativeLayout>
@@ -143,7 +141,6 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="aaa"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_11sdp" />
                     </RelativeLayout>
@@ -166,7 +163,6 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="aaa"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_11sdp" />
                     </RelativeLayout>
@@ -189,7 +185,6 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="aaa"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_11sdp" />
                     </RelativeLayout>
@@ -212,7 +207,28 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="aaa"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11sdp" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_shadow_textview">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Tỉnh thành"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/mTvProvince"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text=""
                             android:textColor="@color/black"
                             android:textSize="@dimen/_11sdp" />
                     </RelativeLayout>

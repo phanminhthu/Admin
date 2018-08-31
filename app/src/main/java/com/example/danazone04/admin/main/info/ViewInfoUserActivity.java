@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.danazone04.admin.BaseActivity;
 import com.example.danazone04.admin.R;
@@ -38,6 +39,8 @@ public class ViewInfoUserActivity extends BaseActivity {
     @ViewById
     TextView mTvBike;
     @ViewById
+    TextView mTvProvince;
+    @ViewById
     RelativeLayout mRlCall;
     @ViewById
     RelativeLayout mRlEmail;
@@ -54,6 +57,7 @@ public class ViewInfoUserActivity extends BaseActivity {
             mTvEmail.setText(mUsers.getEmail());
             mTvSex.setText(mUsers.getSex());
             mTvPhone.setText(mUsers.getPhone());
+            mTvProvince.setText(mUsers.getProvince());
         }
 
     }
@@ -66,9 +70,16 @@ public class ViewInfoUserActivity extends BaseActivity {
               break;
 
             case R.id.mRlEmail:
-                Intent email = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "", null));
-                email.putExtra(Intent.EXTRA_SUBJECT, "DaNa Bike");
-                startActivity(Intent.createChooser(email, "DaNa Bike"));
+//                Intent email = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "", null));
+//                email.putExtra(Intent.EXTRA_EMAIL, mUsers.getEmail());
+//                email.putExtra(Intent.EXTRA_SUBJECT, "DaNa Bike");
+//                startActivity(Intent.createChooser(email, "DaNa Bike"));
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("plain/text");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[] { mUsers.getEmail() });
+                intent.putExtra(Intent.EXTRA_SUBJECT, "DaNa Bike");
+                intent.putExtra(Intent.EXTRA_TEXT, "Chào bạn!");
+                startActivity(Intent.createChooser(intent, ""));
                 break;
         }
     }
