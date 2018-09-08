@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DaNa Bike Admin</string>
+    <string name="internet">Vui lòng kiểm tra kết nối internet</string>
+    <string name="people">Thành viên</string>
+    <string name="id">Vui lòng nhập mã nhân viên</string>
+</resources>

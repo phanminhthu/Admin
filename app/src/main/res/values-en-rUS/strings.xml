@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DaNa Bike Admin</string>
+    <string name="internet">Pleaase check internet</string>
+    <string name="people">People</string>
+    <string name="id">Please enter id</string>
+</resources>
