@@ -6,7 +6,7 @@
     android:background="@color/colorMain"
     android:orientation="vertical"
     android:gravity="center_vertical"
-    tools:context=".MainActivity">
+    tools:context=".main.MainActivity">
 
         <EditText
             android:textColorHint="#dddddd"

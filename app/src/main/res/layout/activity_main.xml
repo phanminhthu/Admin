@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".main.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,36 +42,49 @@
     </LinearLayout>
 
     <TextView
-        android:visibility="gone"
+        android:id="@+id/mTvPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/_190sdp"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:background="@drawable/bg_edittext"
+        android:padding="@dimen/_10sdp"
+        android:text="DaNa Photo"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_16sdp" />
+
+    <TextView
         android:id="@+id/mTvView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="134dp"
+        android:layout_marginBottom="@dimen/_134sdp"
         android:background="@drawable/bg_shadow_all"
         android:padding="@dimen/_10sdp"
         android:text="Thành viên:"
         android:textColor="@color/black" />
 
     <ImageView
-        android:visibility="gone"
         android:id="@+id/mImgAdd"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="@dimen/_14sdp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/add" />
+        android:background="@drawable/add"
+        android:visibility="gone" />
 
     <ImageView
-        android:visibility="gone"
         android:id="@+id/mImgRemove"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_alignLeft="@+id/mImgAdd"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="75dp"
-        android:background="@drawable/remove" />
+        android:layout_marginBottom="@dimen/_75sdp"
+        android:background="@drawable/remove"
+        android:visibility="gone" />
 </RelativeLayout>

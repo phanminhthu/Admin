@@ -30,6 +30,7 @@
                 android:gravity="center_vertical"
                 android:hint="Tìm kiếm"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="#dddddd" />
         </RelativeLayout>
@@ -40,24 +41,16 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <ImageView
-        android:visibility="gone"
-        android:id="@+id/mImgAdd"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
+    <TextView
+        android:id="@+id/mTvView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="14dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/add" />
+        android:layout_marginBottom="134dp"
+        android:background="@drawable/bg_shadow_all"
+        android:padding="@dimen/_10sdp"
+        android:text="Thành viên:"
+        android:textColor="@color/black" />
 
-    <ImageView
-        android:visibility="gone"
-        android:id="@+id/mImgRemove"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_alignLeft="@+id/mImgAdd"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="75dp"
-        android:background="@drawable/remove" />
 </RelativeLayout>

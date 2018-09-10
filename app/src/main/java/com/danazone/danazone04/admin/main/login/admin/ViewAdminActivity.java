@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -14,15 +13,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.danazone.danazone04.admin.BaseActivity;
-import com.danazone.danazone04.admin.MainActivity;
 import com.danazone.danazone04.admin.R;
 import com.danazone.danazone04.admin.RecyclerViewUtils;
 import com.danazone.danazone04.admin.bean.Admin;
-import com.danazone.danazone04.admin.bean.Users;
 import com.danazone.danazone04.admin.common.Common;
 import com.danazone.danazone04.admin.common.MySingleton;
-import com.danazone.danazone04.admin.main.MainAdapter;
-import com.danazone.danazone04.admin.main.info.ViewInfoUserActivity_;
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;

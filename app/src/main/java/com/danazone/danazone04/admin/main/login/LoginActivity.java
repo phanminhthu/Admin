@@ -6,9 +6,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.danazone.danazone04.admin.BaseActivity;
-import com.danazone.danazone04.admin.MainActivity_;
 import com.danazone.danazone04.admin.R;
 import com.danazone.danazone04.admin.SessionManager;
+import com.danazone.danazone04.admin.main.MainActivity_;
 import com.danazone.danazone04.admin.utils.ConnectionUtil;
 
 import org.androidannotations.annotations.Click;
